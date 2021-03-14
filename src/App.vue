@@ -2,6 +2,7 @@
   <div>
     <h1>Vue Tutorial</h1>
     <input type="text" v-model="message">
+    <button @click="addTodo()">追加</button>
     <br>
     {{ message }}
 
@@ -20,7 +21,7 @@ export default {
   name: 'App',
   data: function () {
     return {
-      message: 'ハロー',
+      message: '',
       todos: [
         { id: 0 , text: 'Rails も勉強しないと'},
         { id: 1 , text: '自動整形ツールを設定してみたい'},
@@ -28,6 +29,16 @@ export default {
       ],
     }
   },
+  methods: {
+    addTodo: function () {
+      const newTodo = {
+        id: this.todos.length + 1,
+        text: this.message
+      };
+      this.todos.push(newTodo);
+      this.message = "";
+    }
+  }
 };
 </script>
 
