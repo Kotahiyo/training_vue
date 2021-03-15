@@ -2,7 +2,7 @@
   <div>
     <h1>Vue Tutorial</h1>
     <input type="text" v-model="message">
-    <button @click="addTodo()">追加</button>
+    <button :disabled="isDisabled" @click="addTodo()">追加</button>
     <br>
     {{ message }}
 
@@ -27,6 +27,11 @@ export default {
         { id: 1 , text: '自動整形ツールを設定してみたい'},
         { id: 2 , text: 'Vue は今週中まで'},
       ],
+    }
+  },
+  computed: {
+    isDisabled() {
+      return this.message.length === 0;
     }
   },
   methods: {
