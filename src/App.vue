@@ -1,26 +1,57 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png" />
-  <HelloWorld msg="Welcome to Your Vue.js App" />
+  <div>
+    <h1>Vue Tutorial</h1>
+    <input type="text" v-model="message">
+    <button :disabled="isDisabled" @click="addTodo()">追加</button>
+    <br>
+    {{ message }}
+
+    <ul>
+      <li v-for="todo in todos" :key="todo.id" class="task-card">
+        {{ todo.text }}
+      </li>
+    </ul>
+
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
+  data: function () {
+    return {
+      message: '',
+      todos: [
+        { id: 0 , text: 'Rails も勉強しないと'},
+        { id: 1 , text: '自動整形ツールを設定してみたい'},
+        { id: 2 , text: 'Vue は今週中まで'},
+      ],
+    }
   },
+  computed: {
+    isDisabled() {
+      return this.message.length === 0;
+    }
+  },
+  methods: {
+    addTodo: function () {
+      const newTodo = {
+        id: this.todos.length + 1,
+        text: this.message
+      };
+      this.todos.push(newTodo);
+      this.message = "";
+    }
+  }
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.task-card {
+ border: solid 1px;
+ margin: 5px;
+ padding: 2px;
+ width: 250px;
 }
 </style>
