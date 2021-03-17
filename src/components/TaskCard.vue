@@ -1,6 +1,7 @@
 <template>
   <li class="task-card">
-    {{ text }}
+    <span>{{ text }}</span>
+    <button @click="remove">削除</button>
   </li>
 </template>
 
@@ -11,6 +12,15 @@ export default {
     text: {
       type: String,
       default: ""
+    },
+    id: {
+      type: Number,
+      required: true
+    }
+  },
+   methods: {
+    remove() {
+       this.$emit("remove-task", this.id)
     }
   }
 }
@@ -23,4 +33,5 @@ export default {
  padding: 2px;
  width: 250px;
 }
+
 </style>

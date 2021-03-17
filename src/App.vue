@@ -7,9 +7,14 @@
     {{ message }}
 
     <ul>
-      <TaskCard v-for="todo in todos" :key="todo.id" :text="todo.text" />
+      <TaskCard
+        v-for="todo in todos"
+        :id="todo.id"
+        :key="todo.id"
+        :text="todo.text"
+        @remove-task="removeTodo"
+      />
     </ul>
-
   </div>
 </template>
 
@@ -44,6 +49,9 @@ export default {
       };
       this.todos.push(newTodo);
       this.message = "";
+    },
+    removeTodo(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
     }
   }
 };
